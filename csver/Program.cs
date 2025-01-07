@@ -90,9 +90,13 @@ class Program{
 	}
 
 	public static int Main(){
+		/*
 		int width=12;
 		int height=10;
 		string MD="111111111111111111110001111100000111110001110111110110110111110111010111111111011111111011011111100000011111111111111111";
+		Point Pos = new Point(1,height-2);
+		Point End = new Point(width-2,1);
+		*/
 /*		111111111111
 		111111110001
 		111100000111
@@ -104,16 +108,63 @@ class Program{
 		100000011111
 		111111111111	*/
 
+		
+		//Maze A
+		/*
+		int width=17;
+		int height=13;
+		string MD="11111111111111111101000110001111111100011011100111110110000111100111111011110110110011110100101111111110011011101001011101111001111111111001101101111101111100011011000001100111110001111011010011111011110111111111111111111";
+		Point Pos=new Point(1,1);
+		Point End = new Point(width-2,height-2);
+		*/
+		/*
+		11111111111111111
+		10100011000111111
+		11000110111001111
+		10110000111100111
+		11101111011011001
+		11101001011111111
+		10011011101001011
+		10111100111111111
+		10011011011111011
+		11100011011000001
+		10011111000111101
+		10100111110111101
+		11111111111111111
+		*/
+
+		//Maze B
+		
+		int width=8;
+		int height=11;
+		string MD="1111111110000001111111011000000110111111100000011111110110000001101111111000000111111111";
+		Point Pos=new Point(1,1);
+		Point End = new Point(width-2,height-2);
+		
+		/*
+		11111111
+		10000001
+		11111101
+		10000001
+		10111111
+		10000001
+		11111101
+		10000001
+		10111111
+		10000001
+		11111111
+		*/
+
+
 		Maze A=new Maze(width,height,MD);
 		A.MixPrint();
 
 		Path? Tail=null;
 		int dir=0;
-		Point Pos = new Point(1,height-2);
+	
 		Point lPos=Pos;
 		Point CheckPos;
 
-		Point End = new Point(width-2,1);
 
 		//dead end check
 		if(A.Cdata(Pos)==8){
@@ -197,6 +248,24 @@ class Program{
 				}
 				newBranch=false;
 			}while(backtrack);
+		}
+
+		Console.Write("\n\n");
+		int n=0;
+		Path r=Tail;
+		while(r!=null){
+			++n;
+			r=r.Last;
+		}
+		Point[] output=new Point[n];
+		r=Tail;
+		int m=n;
+		while(0!=(m--)){
+			output[m]=r.Pos;
+			r=r.Last;
+		}
+		for(int x=0;x<n;x++){
+			Console.Write(output[x].x+","+output[x].y+"\n");
 		}
 		return 0;
 	}
